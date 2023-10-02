@@ -1,0 +1,93 @@
+*, ::after, ::before{margin: 0px;padding: 0px;outline: none;list-style: none;text-decoration: none;box-sizing: border-box;}
+:root{
+    --valSun:220px;
+    --valEarth:50px;
+    --valueRotate:.05s;
+}
+html, body{height: 100%;}
+body{background-color: rgb(0, 0, 0);}
+/* start container */
+body #container{height:inherit;display: flex;perspective: 1500px;perspective-origin: top center;}
+body #container .system_Solaire{--whSystem:900px;width: var(--whSystem);height: var(--whSystem);display:grid;place-items: center; margin: auto;transform-style: preserve-3d;transform: rotateX(90deg);}
+body #container .system_Solaire .linePlanet, .lineSun{position: absolute;border-radius: 50%;width:calc(var(--i) * calc(var(--whSystem) / 10));height:calc(var(--i) * calc(var(--whSystem) / 10));border: 1px solid rgba(255, 255, 255, 0.1);transform-style: preserve-3d; transform: translateZ(calc(var(--i) * 0px));}
+body #container .system_Solaire .lineSun{width:calc(var(--i) * 105px);height:calc(var(--i) * 105px); transform: translateZ(calc(var(--i) * 5px)) rotateX(90deg);}
+body #container .system_Solaire .lineSun .sun{height: 100%;width: 100%;overflow: hidden;border-radius: inherit;box-shadow: 0px 0px 35px 10px orange;}
+body #container .system_Solaire .lineSun .sun .backGroundSun{height: 100%;width: 100%;background-image: url('../img/sun.png');background-size: 100% 100%;background-repeat: no-repeat; animation: SunAnimation 15s linear forwards infinite;}
+body #container .system_Solaire .linePlanet{animation:Rotate_line_Planet calc(var(--i) * calc(var(--valueRotate) * var(--days))) linear infinite;}
+body #container .system_Solaire .linePlanet .planet{overflow: hidden;border-radius: 50%;background-repeat: no-repeat; background-size: 100% 100%;position: absolute;left: 50%;transform: translate(-50%,-50%) rotateX(90deg);animation:Rotate_Planet calc(var(--i) * calc(var(--valueRotate) * var(--days))) linear infinite;}
+body #container .system_Solaire .linePlanet .planet.Mercury{background-image: url('../img/Mercury.png');height: 25px;width: 25px;}
+body #container .system_Solaire .linePlanet .planet.Venus{background-image: url('../img/Venus.png');height: 35px;width: 35px;}
+body #container .system_Solaire .linePlanet .planet.Earth{height: 40px;width: 40px;box-shadow: 0px 0px 25px 1px skyblue;transform-style:preserve-3d;overflow: visible;}
+body #container .system_Solaire .linePlanet .planet.Earth .backGroundEarth{height: 100%;width: 100%;background-image: url('../img/earth.jpg');background-repeat: repeat-x;background-size: 200% 100%;transform: rotateZ(180deg);box-shadow: inset 0px 0px 5px 2px black;border-radius:50%; animation: moveEarth calc(var(--valueRotate) * 25) linear infinite;}
+body #container .system_Solaire .linePlanet .planet.Earth .lineMoon{width: 160%;height: 160%;border-radius: 50%;border: 1px solid rgba(0, 0, 0, 0.1);transform: translate(-50%,-50%) rotateX(90deg);position: absolute;left: 50%;top: 50%;transform-style: preserve-3d; animation: Rotate_line_Moon calc(var(--valueRotate) * 13) linear infinite;}
+body #container .system_Solaire .linePlanet .planet.Earth .lineMoon::after{content: '';width: 20%;height: 20%;border-radius: 50%;background-color: bisque;display: block;position: absolute;top: 0%;left: 50%;transform: translateX(-50%) rotateX(90deg);box-shadow: 0px 0px 15px 2px #fff;animation:Rotate_Moon calc(var(--valueRotate) * 13)  linear infinite;}
+body #container .system_Solaire .linePlanet .planet.Mars{background-image: url('../img/Mars.png');height: 30px;width: 30px;}
+body #container .system_Solaire .linePlanet .planet.Jupiter{background-image: url('../img/Jupiter.png');height: 55px;width: 55px;}
+body #container .system_Solaire .linePlanet .planet.Saturn{background-image: url('../img/saturn.webp');height: 50px;width: 50px;}
+body #container .system_Solaire .linePlanet .planet.Uranus{background-image: url('../img/Uranus.png');height: 45px;width: 45px;}
+body #container .system_Solaire .linePlanet .planet.Neptune{background-image: url('../img/Neptune.png');height: 40px;width: 40px;}
+body #container .system_Solaire .linePlanet .planet.Pluto{background-image: url('../img/Pluto.png');height: 15px;width: 15px;}
+body #container .stars{width: 100%;height: 100%;z-index: -1;position: absolute;}
+body #container .stars .str{width: 1px;height: 1px;box-shadow: 0px 0px 5px 2px #ffffff8a;position: absolute;background-color: #fff;border-radius: 50px 0px 50px 0px;}
+@keyframes SunAnimation{
+    0%{transform: scale(1);}
+    50%{transform: scale(2);}
+    100%{transform: scale(1);}
+}
+@keyframes moveEarth{
+    0%{
+        background-position: 0px -0px;
+    }
+    100%{
+        background-position: -200% -0px;
+    }
+}
+@keyframes Rotate_line_Planet{
+    0%{
+        transform: translateZ(calc(var(--i) * 0px)) rotateZ(0deg);
+    }
+    100%{
+        transform: translateZ(calc(var(--i) * 0px)) rotateZ(360deg);
+    }
+}
+@keyframes Rotate_Planet{
+    0%{
+        transform: translate(-50%,-50%) rotateX(90deg) rotateY(0deg);
+    }
+    100%{
+        transform: translate(-50%,-50%) rotateX(90deg) rotateY(-360deg);
+    }
+}
+@keyframes Rotate_line_Moon{
+    0%{
+        transform: translate(-50%,-50%) rotateX(90deg) rotateZ(0deg);
+    }
+    100%{
+        transform: translate(-50%,-50%) rotateX(90deg) rotateZ(360deg);
+    }
+}
+@keyframes Rotate_Moon{
+    0%{
+        transform: translate(-50%,-50%) rotateX(90deg) rotateY(0deg);
+    }
+    100%{
+        transform: translate(-50%,-50%) rotateX(90deg) rotateY(-360deg);
+    }
+}
+
+
+
+
+
+
+
+/* body #container .system_Solaire .planet.Sun_star .sun img{width: 200%;height: 200%;margin-left: -16%;margin-top: -50%;} */
+/* body #container .system_Solaire .Mercury_planet{width: 500px;height: 500px;border: 1px solid rgb(0, 255, 30);}
+body #container .system_Solaire .Venus_planet{width: 300px;height: 300px;border: 1px solid rgb(255, 255, 0);}
+body #container .system_Solaire .Earth_planet{width: 300px;height: 300px;border: 1px solid rgb(255, 255, 0);}
+body #container .system_Solaire .Mars_planet{width: 300px;height: 300px;border: 1px solid rgb(255, 255, 0);}
+body #container .system_Solaire .Jupiter_planet{width: 300px;height: 300px;border: 1px solid rgb(255, 255, 0);}
+body #container .system_Solaire .Saturn_planet{width: 300px;height: 300px;border: 1px solid rgb(255, 255, 0);}
+body #container .system_Solaire .Uranus_planet{width: 300px;height: 300px;border: 1px solid rgb(255, 255, 0);}
+body #container .system_Solaire .Neptune_planet{width: 300px;height: 300px;border: 1px solid rgb(255, 255, 0);}
+body #container .system_Solaire .Pluto_planet{width: 300px;height: 300px;border: 1px solid rgb(255, 255, 0);} */
